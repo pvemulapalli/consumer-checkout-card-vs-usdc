@@ -1,10 +1,12 @@
-"use client";
+'use client';
 
 import { useEffect, useState } from "react";
+
 import Microform from "./Microform";
 
 export default function CheckoutPage() {
   const [data, setData] = useState<any>(null);
+  const [paymentMethod, setPaymentMethod] = useState<'card' | 'usdc'>('card');
 
   useEffect(() => {
     async function fetchData() {
@@ -139,15 +141,56 @@ export default function CheckoutPage() {
         {/* RIGHT PANEL */}
         <div className="p-10 bg-gray-50 flex flex-col justify-center">
 
-          <h2 className="text-xl font-semibold mb-6">
-            Pay with Credit Card
-          </h2>
+        <h2 className="text-xl font-semibold mb-6">
+          {paymentMethod === 'card' ? 'Pay with Card' : 'Pay with USDC'}
+        </h2>
 
-          <Microform
-            captureContext={data.captureContext}
-            clientLibrary={data.clientLibrary}
-            integrity={data.clientLibraryIntegrity}
-          />
+        <div className="flex gap-3 mb-6">
+        <button
+          onClick={() => setPaymentMethod('card')}
+          className={`px-4 py-2 rounded ${
+            paymentMethod === 'card'
+              ? 'bg-purple-600 text-white'
+              : 'bg-gray-200'
+          }`}
+        >
+          Card (Visa Acceptance)
+        </button>
+
+        <button
+          onClick={() => setPaymentMethod('usdc')}
+          className={`px-4 py-2 rounded ${
+            paymentMethod === 'usdc'
+              ? 'bg-purple-600 text-white'
+              : 'bg-gray-200'
+          }`}
+        >
+          USDC (Solana)
+        </button>
+      </div>
+
+      {paymentMethod === 'card' && (
+        <Microform
+          captureContext={data.captureContext}
+          clientLibrary={data.clientLibrary}
+          integrity={data.clientLibraryIntegrity}
+        />
+      )}
+
+      {paymentMethod === 'usdc' && (
+      <div className="bg-white border rounded-lg p-6 shadow-sm">
+        <h3 className="text-lg font-semibold mb-2">
+          USDC Checkout (Coming Next)
+        </h3>
+        <p className="text-gray-600 text-sm mb-4">
+          This will allow payment using a Solana wallet.
+        </p>
+
+        <button className="bg-purple-600 text-white px-4 py-2 rounded">
+          Connect Wallet
+        </button>
+      </div>
+    )}
 
         </div>
 
