@@ -5,6 +5,8 @@ node_modules/
 .next/
 
 # Env files
+backend/config/Configuration.local.js
+*.local.js
 .env
 .env.local
 .env.*
@@ -28,4 +30,3 @@ build/
 *.pem
 backend/resource/
 frontend/resource/
-backend/Data/Configuration.local.js
