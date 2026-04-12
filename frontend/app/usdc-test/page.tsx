@@ -1,9 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import dynamic from 'next/dynamic';
+import { useWallet } from '@solana/wallet-adapter-react';
+
+const WalletMultiButton = dynamic(
+  async () => (await import('@solana/wallet-adapter-react-ui')).WalletMultiButton,
+  { ssr: false }
+);
 
 export default function USDCTestPage() {
-  const [wallet, setWallet] = useState<string | null>(null);
+  const { publicKey, connected } = useWallet();
 
   return (
     <div className="min-h-screen p-10 bg-gray-100">
@@ -17,24 +23,22 @@ export default function USDCTestPage() {
         <div>
           <p className="text-sm text-gray-600">Wallet Status:</p>
           <p className="font-medium">
-            {wallet ? wallet : 'Not connected'}
+            {connected && publicKey
+              ? publicKey.toBase58()
+              : 'Not connected'}
           </p>
         </div>
 
         {/* Connect Wallet */}
-        <button
-          className="bg-purple-600 text-white px-4 py-2 rounded"
-          onClick={() => alert('Wallet connection coming next')}
-        >
-          Connect Wallet
-        </button>
+        <WalletMultiButton />
 
         {/* Pay Button */}
         <button
           className="bg-black text-white px-4 py-2 rounded w-full"
+          disabled={!connected}
           onClick={() => alert('USDC payment coming next')}
         >
-          Pay with USDC
+          {connected ? 'Pay with USDC' : 'Connect wallet first'}
         </button>
 
         <p className="text-sm text-gray-500">
