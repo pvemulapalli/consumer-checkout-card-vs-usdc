@@ -23,7 +23,7 @@ This is a Next.js frontend that renders a dual checkout experience using:
 - Sends token to backend for authorization via Visa Acceptance APIs  
 - Displays transaction result to the user  
 
-👉 Mirrors real-world enterprise card payment integrations
+This mirrors real-world enterprise card payment integrations.
 
 ---
 
@@ -38,14 +38,14 @@ This is a Next.js frontend that renders a dual checkout experience using:
 
 ## 🔐 Why Flex Microform v2 matters
 
-This implementation uses **Visa Acceptance Flex Microform v2**, which ensures:
+This implementation uses Visa Acceptance Flex Microform v2, which ensures:
 
-- PCI DSS **SAQ-A compliance scope**  
+- PCI DSS SAQ-A compliance scope  
 - Sensitive card data is isolated in secure iframes  
 - Your application never handles raw PAN data  
 - Tokenization replaces card data with a secure transient token  
 
-👉 This is the same pattern used in production-grade payment systems
+This is the same pattern used in production-grade payment systems.
 
 ---
 
@@ -64,8 +64,9 @@ This implementation uses **Visa Acceptance Flex Microform v2**, which ensures:
 ```bash
 npm install
 npm run dev
+```
 
-Runs at:
+Runs at:  
 http://localhost:3000
 
 ---
@@ -81,23 +82,30 @@ http://localhost:3000/checkout
 ## 🔗 Backend dependency
 
 This frontend expects the backend to be running at:
+
 http://localhost:4000
 
 ---
 
 ## 🔐 Environment Variables
 
-Create frontend/.env.local
+Create a file:
 
+frontend/.env.local
+
+Add:
+
+```bash
 NEXT_PUBLIC_API_URL=http://localhost:4000
 NEXT_PUBLIC_MERCHANT_WALLET=YOUR_DEVNET_WALLET
+```
 
 ---
 
 ## ⚠️ Notes
 
-* No raw card data is handled by the frontend
-* Microform securely manages PCI-sensitive fields
-* Uses Visa Acceptance sandbox environment
-* Uses Solana Devnet (not mainnet)
-* This is a demo project for learning and showcasing payment architectures
+- No raw card data is handled by the frontend  
+- Microform securely manages PCI-sensitive fields  
+- Uses Visa Acceptance sandbox environment  
+- Uses Solana Devnet (not mainnet)  
+- This is a demo project for learning and showcasing payment architectures  

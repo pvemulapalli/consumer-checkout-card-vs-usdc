@@ -1,3 +1,14 @@
+## ⚡ TL;DR
+
+A working checkout that compares:
+
+- Visa card payments (Flex Microform v2)
+- USDC payments on Solana
+
+Same transaction → different economics and settlement behavior
+
+👉 Built to explore what happens when checkout itself moves onchain
+
 # Checkout: Card Rails vs Onchain Payments (Visa Acceptance vs USDC on Solana)
 
 Most discussions about stablecoins in payments focus on settlement.
@@ -24,6 +35,16 @@ Two payment methods:
 
 Visa stablecoin settlement discussion:
 https://x.com/SolanaFloor/status/2044717731766050905
+
+---
+
+## 🎯 Why I built this
+
+Recent discussions around stablecoins in payments focus on settlement between institutions.
+
+I wanted to explore what happens if the checkout experience itself becomes onchain.
+
+This project is a hands-on attempt to bridge that gap.
 
 ---
 
@@ -101,6 +122,8 @@ Stablecoins:
 - Direct value transfer
 - Minimal network fees
 - Faster settlement
+
+Unlike card payments, stablecoin payments bypass intermediaries and settle directly between wallets, removing traditional fee layers.
 
 ---
 
@@ -180,6 +203,14 @@ http://localhost:3000/checkout
 - Ensure sufficient USDC balance  
 - Click **Pay with USDC**  
 - Approve the transaction in your wallet  
+
+---
+
+## ⚠️ Limitations
+
+- Uses sandbox (Visa) and devnet (Solana)
+- Does not include refunds, disputes, or reconciliation flows
+- Stablecoin UX still requires wallet setup (not consumer-friendly yet)
 
 ---
 
