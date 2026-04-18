@@ -9,7 +9,7 @@ This is a Next.js frontend that renders a dual checkout experience using:
 
 ## 🖼 Checkout Experience
 
-![Checkout Demo](../checkout-card-vs-usdc.png)
+![Checkout Demo](../checkout-demo.png)
 
 ---
 
