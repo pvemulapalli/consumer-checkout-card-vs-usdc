@@ -94,7 +94,7 @@ app.post('/api/card/pay', function (req, res) {
     processingInformation.commerceIndicator = 'internet';
 
     const amountDetails = new cybersourceRestApi.Ptsv2paymentsOrderInformationAmountDetails();
-    amountDetails.totalAmount = '82.73';
+    amountDetails.totalAmount = '100.00';
     amountDetails.currency = 'USD';
 
     const billTo = new cybersourceRestApi.Ptsv2paymentsOrderInformationBillTo();

@@ -6,6 +6,7 @@ export default function Microform({
   captureContext,
   clientLibrary,
   integrity,
+  onSuccess,
 }: any) {
   const microformRef = useRef<any>(null);
 
@@ -88,7 +89,8 @@ const handlePay = () => {
       try {
         setStatus("processing"); // ✅ MOVE HERE
 
-        const res = await fetch("http://localhost:4000/api/card/pay", {
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/card/pay`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -100,10 +102,16 @@ const handlePay = () => {
 
         const data = await res.json();
 
-        if (data.status === "success") {
-          setTransactionId(data.data.id);
-          setStatus("success");
-        } else {
+      if (data.status === "success") {
+        setTransactionId(data.data.id);
+        setStatus("success");
+
+        console.log("✅ Card payment complete");
+
+        if (onSuccess) {
+          onSuccess(); // 👈 THIS is the missing link
+        }
+      } else {
           setStatus("error");
           setErrorMessage("Payment failed");
         }
@@ -209,12 +217,16 @@ const handlePay = () => {
         </div>
         </div>
 
+        <p className="text-xs text-gray-500 mb-2">
+          Demo Card: 4622 9431 2701 3705 | CVV: 838 | Exp: 06/2030
+        </p>
+
         <button
         type="button"
         onClick={handlePay}
-        className="w-full bg-black text-white py-4 rounded-lg mt-4 text-lg font-semibold hover:bg-gray-900 transition cursor-pointer"
+        className="w-full bg-black text-white py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition"
         >
-        Pay $82.73
+        Pay $100.00
         </button>
 
         <p className="text-xs text-gray-500 text-center mt-3">

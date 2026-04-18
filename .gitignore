@@ -9,7 +9,6 @@ backend/config/Configuration.local.js
 *.local.js
 .env
 .env.local
-.env.*
 
 # Logs
 npm-debug.log*
